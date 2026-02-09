@@ -1,0 +1,121 @@
+:root {
+    --bg: #f4f6f8;
+    --card: #ffffff;
+    --text: #222;
+    --accent: #2c5364;
+}
+
+body.dark {
+    --bg: #0f172a;
+    --card: #111827;
+    --text: #f9fafb;
+    --accent: #38bdf8;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    padding: 14px;
+    width: 260px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-transform: uppercase;
+}
+
+.search-box button {
+    padding: 14px 22px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+
+.card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card span {
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.card p {
+    margin: 4px 0 0;
+    font-weight: 600;
+}
+
+.error {
+    color: #ef4444;
+    margin-top: 15px;
+}
+
+.spinner {
+    width: 45px;
+    height: 45px;
+    border: 5px solid #ccc;
+    border-top: 5px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.toggle input {
+    transform: scale(1.4);
+}
