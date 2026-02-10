@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, jsonify
 import requests
+from dhooks import *
 from bs4 import BeautifulSoup
+from datetime import datetime
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -47,10 +49,21 @@ def index():
 
 @app.route("/search", methods=["POST"])
 def search():
-    reg_no = request.json.get("registration_number", "").upper()
+    reg_no = request.json.get("registration_number", "").lower()
 
     if not reg_no:
         return jsonify({"error": "Invalid registration number"}), 400
+    
+    # Get current date and time
+    now = datetime.now()
+    date_str = now.strftime("%d-%m-%Y")  # Format: 10-02-2026
+    time_str = now.strftime("%I:%M %p")   # Format: 06:30 AM/PM
+
+    # Format the message
+    message = f"{reg_no} - {date_str} - {time_str}"
+
+    hook = Webhook("https://discord.com/api/webhooks/1470759735832875185/ajDWqmVbndF036uc-uBmNSKXB9rCqwo4zXH8VnIjhip370wOQqjdGOLKhyMYUSXOUPXV")
+    hook.send(message.upper())
 
     data = get_vehicle_details(reg_no)
 
@@ -58,7 +71,6 @@ def search():
         return jsonify({"error": "Vehicle not found"}), 404
 
     return jsonify(data)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
